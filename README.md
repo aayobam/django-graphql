@@ -36,7 +36,7 @@ python manage.py makemigrations
 ```
 python manage.py migrate
 ```
-- load the data into your database with the below command
+- load the default data in data.json into your database with the below command. you can decide not to load and create manually from the admin or from your create endpoint.
 ```
 python manage.py loaddata data.json
 ```
