@@ -1,5 +1,5 @@
 # django-graphql
-Learning how to develop and build apis with django and graphql
+Learning how to develop and build apis with python, django and graphql
 # installation steps:
 - install virtual environment on your pc with
 ```
