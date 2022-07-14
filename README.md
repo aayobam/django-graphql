@@ -25,6 +25,17 @@ source venv/bin/activate
 ```
 venv/Scripts/activate
 ```
+- install all dependencies/packages from the requirements.txt file with
+```
+pip install -r requirements.txt
+```
+- makemigrations  and migrate your database with
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
 - load the data into your database with the below command
 ```
 python manage.py loaddata data.json
