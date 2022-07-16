@@ -1,6 +1,6 @@
 import graphene
+from apps.schema.models import Book
 from graphene_django import DjangoObjectType
-from api.models import Book
 
 
 

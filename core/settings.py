@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import environ
 from celery.schedules import crontab
 from pathlib import Path
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
 
 
 env = environ.Env()
@@ -47,10 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #local app
-    "api",
+    'apps.schema',
 
     #third party apps
-    "graphene_django",
+    'graphene_django',
 ]
 
 
@@ -155,5 +158,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Graphene Configuration
 GRAPHENE = {   
-    "SCHEMA": "api.schema.schema"
+    "SCHEMA": "apps.schema.schema.schema"
 }
