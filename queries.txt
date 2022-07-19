@@ -1,0 +1,55 @@
+# query allBooks{
+#   allBooks{
+#     id,
+#     title,
+#     author,
+#     yearPublished,
+#     review
+#   }
+# }
+
+# query bookDetails{
+#   bookDetails(bookId:"cb330ec6-b69d-4701-aaa9-77fe381af238"){
+#     id,
+#     title,
+#     author,
+#     yearPublished,
+#     review
+#   }
+# }
+
+# mutation createMutation {
+#   createBook(bookData: {title: "Things Apart", author: "Chinua Achebe", yearPublished: "1985", review: 3}) {
+#     book {
+#       id,
+#       title
+#       author,
+#       yearPublished,
+#       review
+#     }
+#   }
+# }
+
+# mutation updateMutation{
+#   updateBook(bookData: {id: "c860fade-5774-4a46-998a-6abf17ceb6d2", title: "Things Apart", author: "Chinua Achebe", yearPublished: "1989", review: 4}){
+#     book{
+#       id,
+#       title,
+#       author,
+#       yearPublished,
+#       review
+#     }
+#   }
+# }
+
+# mutation deleteMutation{
+#   deleteBook(id: "7d442a81-4a43-44c6-bd0d-951bd8b5670c"){
+#     book{
+#       id,
+#       title,
+#       author,
+#       yearPublished,
+#       review
+#     }
+#   }
+# }

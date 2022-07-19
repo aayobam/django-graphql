@@ -1,4 +1,5 @@
 import graphene
+from graphql import GraphQLError
 from apps.schema.models import Book
 from graphene_django import DjangoObjectType
 
@@ -12,14 +13,14 @@ class BookType(DjangoObjectType):
 
 
 # This helps to fetch data from the server/database(List and Details views)
-class Query(graphene.ObjectType):
+class BookQuery(graphene.ObjectType):
     all_books = graphene.List(BookType)
-    book = graphene.Field(Book, book_id=graphene.ID())
+    book_details = graphene.Field(BookType, book_id=graphene.ID())
 
     def resolve_all_books(self, info, **kwargs):
         return Book.objects.all()
 
-    def resolve_book(self, info, book_id):
+    def resolve_book_details(self, info, book_id, **kwargs):
         return Book.objects.get(id=book_id)
 
 
@@ -36,7 +37,7 @@ class BookInput(graphene.InputObjectType):
 
 # create new books
 class CreateBook(graphene.Mutation):
-    class Arguements:
+    class Arguments:
         book_data = BookInput(required=True)
 
     book = graphene.Field(BookType)
@@ -53,7 +54,7 @@ class CreateBook(graphene.Mutation):
         return CreateBook(book=book_instance)
 
 
-# update book
+# update book instance
 class UpdateBook(graphene.Mutation):
     class Arguments:
         book_data = BookInput(required=True)
@@ -83,13 +84,8 @@ class DeleteBook(graphene.Mutation):
     @staticmethod
     def mutate(root, info, id):
         book_instance = Book.objects.get(pk=id)
-        book_instance.delete()
-        return None
+        if book_instance:
+            book_instance.delete()
+            return DeleteBook(book=None)
+        raise GraphQLError("book instance not found")
 
-
-class Mutation(graphene.ObjectType):
-    create_book = CreateBook.Field()
-    update_book = UpdateBook.Field()
-    delete_book = DeleteBook.Field()
-
-schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -15,11 +15,13 @@ from celery.schedules import crontab
 from pathlib import Path
 import django
 from django.utils.encoding import force_str
-django.utils.encoding.force_text = force_str
 
+
+django.utils.encoding.force_text = force_str
 
 env = environ.Env()
 environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -133,6 +135,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTHENTICATION_BACKENDS = [
+#     "graphql_jwt.backends.JSONWebTokenBackend",
+#     "django.contrib.auth.backends.ModelBackend",
+# ]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -157,6 +164,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Graphene Configuration
-GRAPHENE = {   
-    "SCHEMA": "apps.schema.schema.schema"
+GRAPHENE = {
+    "SCHEMA": "core.schema.schema",
+    "ATOMIC_MUTATIONS": True,
+    # "MIDDLEWARE": [
+    #     "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    # ],
 }
